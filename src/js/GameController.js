@@ -10,6 +10,7 @@ import { generateTeam } from './generators';
 import PositionedCharacter from './PositionedCharacter';
 import GamePlay from './GamePlay';
 import GameState from './GameState';
+import GameStateService from './GameStateService';
 
 export default class GameController {
   constructor(gamePlay, stateService) {
@@ -74,8 +75,7 @@ export default class GameController {
         this.gamePlay.redrawPositions(this.gameState.allTypesPositions);
       }
     } catch (error) {
-      GameController.clearLocalStorage('state');
-      // localStorage.removeItem('state');
+      GameStateService.clear('state');
       GamePlay.showPopup(`Ошибка загрузки: "${error.message}"`);
       this.newGame();
     }
@@ -507,9 +507,5 @@ export default class GameController {
       this.gamePlay.redrawPositions(this.gameState.allTypesPositions);
       GamePlay.showPopup(`Уровень ${this.gameState.level} Счет: ${this.gameState.points}`);
     }
-  }
-
-  static clearLocalStorage(key) {
-    localStorage.removeItem(key);
   }
 }

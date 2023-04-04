@@ -13,7 +13,7 @@ jest.mock('../GamePlay');
 test('test gameLoad', () => {
   jest.resetAllMocks();
   gameController.gamePlay.cellClickListeners = [1, 2, 3];
-  GameController.clearLocalStorage = jest.fn(() => {});
+  GameStateService.clear = jest.fn(() => {});
   gameController.loadGame();
   expect(GamePlay.showPopup).toBeCalledWith('Ошибка загрузки: "Invalid state"');
 });
